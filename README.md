@@ -22,10 +22,10 @@ Project Title was created using VS Code
 
 ## The Team <a name="Team"></a> <br>
 Known in class as "Group 4"
-* Jason Jones. - [Portfolio](https://jasonjonesthe.dev/) - [Github](https://github.com/jasojone)
-*  
-*  
-*  
+* Jason Jones - [Portfolio](https://jasonjonesthe.dev/) - [Github](https://github.com/jasojone)
+*  Abigail R. Pinkus -   
+*  Casey Merritt -  
+*  Suhuan Pan -  
 
 
 
