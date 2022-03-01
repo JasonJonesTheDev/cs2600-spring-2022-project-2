@@ -88,3 +88,20 @@ float amountSaved(float allowable, float total){
  
 }
 
+/* 
+* Calculates the difference between allowable trip amount and total trip amount
+* Function should only be called if total is less than allowable otherwise return value will be invalid
+*/
+float amountExcess(float allowable, float total){
+
+    if(total < allowable){
+        printf("Something is broken");//this function should not be called if the total is less than allowable, call the saved function instead
+        return -1;
+    }else if(total == allowable){
+        printf("the trip cost is equal to the allowable trip cost");
+        return 0;
+    }else{
+        return (total - allowable);
+    }
+ 
+}
