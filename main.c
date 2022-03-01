@@ -4,11 +4,11 @@ int main()
 { 
 // Variables
 // Total days traveled
-const int numDay;
+const int numOfDays;
 // The time of departure on the first day of the trip, 
 // and the time of arrival back home on the last day of the trip.
-int departure;
-int arrival;
+int departureTime;
+int arrivalTime;
 
 // The amount of any round-trip airfare 
 float airFair;
