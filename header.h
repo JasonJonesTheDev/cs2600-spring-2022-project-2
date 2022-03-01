@@ -3,11 +3,11 @@
 
 // Variables
 // Total days traveled
-extern const int numDay;
+extern const int numOfDays;
 // The time of departure on the first day of the trip, 
 // and the time of arrival back home on the last day of the trip.
-extern int departure;
-extern int arrival;
+extern int departureTime;
+extern int arrivalTime;
 
 // The amount of any round-trip airfare 
 extern float airFair;
