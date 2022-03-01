@@ -1,6 +1,6 @@
-# Project Title <br>
+# Travel Expence Reimbursment Calculator "TERC" <br>
 
-Project Title is a mobile app with short microgames
+TERC is an all i none calculaotor to determine how much you will pay out of pocket for travel expenses...
 <br><br>
 
 ## Table of Contents <br>
@@ -14,9 +14,9 @@ Project Title is a mobile app with short microgames
 
 ## Introduction <a name="Introduction"></a> <br>
 
-Project Title is a mobile app with short microgames. It was created for the Spring 2022 Software Engineering class at California State Polytechnic University, Pomona. The objective is to design and deliver a product with a randomly selected group of students, using the tools, methods and technologies learned in class. The project is broken up into four iterations of three weeks each. 
+TERC is a C app compiled and ran in the terminal. It was created for the Spring 2022 Systmes Programming class at California State Polytechnic University, Pomona. The objective is to design and deliver a product with a randomly selected group of students, using the tools, methods and technologies learned in class.
 
-Project Title was created using Unity Version 2020.2.3f1
+Project Title was created using VS Code
 
 <br><br>
 
@@ -48,4 +48,4 @@ Known in class as "Group 4"
 [Iteration Four Deliverables]()<br>
 
 ## Acknowledgements <a name="Ack"></a> <br>
-- 
+- git 
