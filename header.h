@@ -1,40 +1,49 @@
 #include <stdio.h>
 
-
 // Variables
+// Variables
+// The running total allowable expenses for the trip
+extern float CompanyRunningTotal;
+// The Rrunning total expenses incurred by the businessperson,
+extern float totalTripCost;
+// The excess that must be reimbursed by the businessperson, if any.
+extern float outOfPocket;
+// The amount saved by the company if the expenses
+// were under the total allowed.
+extern float unUsedFunds;
+
 // Total days traveled
 extern const int numOfDays;
-// The time of departure on the first day of the trip, 
+// The time of departure on the first day of the trip,
 // and the time of arrival back home on the last day of the trip.
 extern int departureTime;
 extern int arrivalTime;
 
-// The amount of any round-trip airfare 
+// The amount of any round-trip airfare
 extern float airFair;
 
-// The amount of any car rentals 
+// The amount of any car rentals
 extern float carRental;
 
-// Miles driven, if a private vehicle was used. 
-// Calculate the vehicle expense as $0.27 per mile driven 
+// Miles driven, if a private vehicle was used.
+// Calculate the vehicle expense as $0.27 per mile driven
 extern int milesDriven;
 extern float milesReimbers;
 
-
-// Parking fees (The company allows up to $6 per day. 
-// Anything more than this must be paid by the employee.) 
+// Parking fees (The company allows up to $6 per day.
+// Anything more than this must be paid by the employee.)
 extern float parkingFees;
 
-// Taxi fees, if a taxi was used anytime during the trip 
-// (The company allows up to $10 per day, for each day a taxi was used. 
-// Anything more than this must be paid by the employee.) 
+// Taxi fees, if a taxi was used anytime during the trip
+// (The company allows up to $10 per day, for each day a taxi was used.
+// Anything more than this must be paid by the employee.)
 extern float taxiFees;
 
-// Conference or seminar registration fees 
+// Conference or seminar registration fees
 extern float registraionFees;
- 
-// Hotel expenses (The company allows up to $90 per night for lodging. 
-// Anything more than this must be paid by the employee.) 
+
+// Hotel expenses (The company allows up to $90 per night for lodging.
+// Anything more than this must be paid by the employee.)
 extern float hotelExpense;
 
 // The amount of each meal eaten and total meal cost after compensation.
