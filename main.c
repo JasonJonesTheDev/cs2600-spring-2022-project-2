@@ -4,14 +4,34 @@ int main()
 {
     // Variables
     // The running total allowable expenses for the trip
-    float CompanyRunningTotal;
+    float totalExpense;
     // The Rrunning total expenses incurred by the businessperson,
-    float totalTripCost;
+    float totalAlowableExpense;
     // The excess that must be reimbursed by the businessperson, if any.
     float outOfPocket;
-    // The amount saved by the company if the expenses
+    // The amount saved by the company/business person if the expenses
     // were under the total allowed.
     float unUsedFunds;
+
+    float maximumFunds;
+
+    // air fair = variable
+    // car rental = car rental
+    // parking fees = 6
+    // taxi fees = 10
+    // hotel = 90
+    // food = variable
+    // gas = variable
+    // conference = variable
+    // 
+    // 
+
+    // calculate total
+    // total expense (running total) + days * 106 
+    // days * 
+
+
+
 
     // Total days traveled
     const int numOfDays;
@@ -54,6 +74,9 @@ int main()
     float totalMealsCost;
 
     printf("Weclome to  \"TERC\" \n Travel Expense Reimbursement Calculator");
+
+
+
 
     // Calculate and display:
     return 0;
