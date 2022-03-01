@@ -4,40 +4,6 @@
 */
 
 #include <stdio.h>
- 
- /* Function Declaration */
-float airfare();
-float registrationFees();
-float hotelFees(int days);
-float amountSaved(float allowable, float total);
-
-/* Test Main For Function Testing */
-int main(){
-
-    //test 1
-    float af = airfare();
-
-    //test 2
-    float rf = registrationFees();
-    
-    //test 3
-    int days = 3;
-    float hf = hotelFees(days);
-
-    //test 4
-    float allowabale = 1700;
-    float total = 1400;
-    float saved = amountSaved(allowabale, total);
-    
-    //check values
-    printf("\n");
-    printf("Airfare: %.2f\n", af);
-    printf("Registration Fees: %.2f\n", rf);
-    printf("Hotel Fees: %.2f\n", hf);
-    printf("Saved: %.2f\n", saved);
-
-    return 0;
-}
 
 /* Asks user for total airfare cost and returns that value*/
 float airfare() {
