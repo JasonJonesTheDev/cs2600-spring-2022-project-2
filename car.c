@@ -13,82 +13,55 @@
     4. taxi fees
 */
 
+/* Car Rental Fees Function */
 float carRentalFees(float carRental) {
-    printf("\nrental: %d\n", carRental);
-    float rentalCost;
+    float rentalCost; // used to hold carRental inside this function
+
+    // Save Rental Cost
     rentalCost = carRental;
 
-    if (carRental <= 0) {
+    // Check for Negative
+    if (carRental <= 0) {// error handeling for negatives
         carRental = 0;
     }
 
     return rentalCost;
 }
 
+/* Mile Fees Function */
 float mileFees(int milesDriven) {
-    float milesReimbers;
-    printf("\nmiles: %d\n", milesDriven);
-    if (milesDriven <= 0) {
+    float milesReimbers; // Claculated mile gas costs
+
+    // Calculate Mile Fees
+    if (milesDriven <= 0) {// check for 0 or < 0
         milesReimbers = 0;
-    } else {
+    } else { // calculation with miles driven
         milesReimbers = (milesDriven * 0.27);
     }
 
-    if(milesReimbers <= 0) {
+    // Check for Negative
+    if(milesReimbers <= 0) { // recheck for negative
         milesReimbers = 0;
     }
 
     return milesReimbers;
 }
 
+/* Parking Fees Function */
 float calculateParkingFees(float parkingFees, int parkingDays) {
-    if (parkingDays <= 0) {
+    // Calculate Parking Fees
+    if (parkingDays <= 0) {// check for 0 or < 0 in days
         parkingFees = 0;
-    } if (parkingFees <= 0) {
+    } if (parkingFees <= 0) { // check for 0 or < 0 in parking fees
         parkingFees = 0;
-    } else {
+    } else { // calculation for parking fees
         parkingFees = parkingFees - (6 * parkingDays);
     }
 
-    if (parkingFees < 0) {
+    // Check for Negative
+    if (parkingFees < 0) { // recheck for negative
         parkingFees = 0;
     }
     
     return parkingFees;
 }
-
-
-/* **This is used in an other file test.c to check my code on my local side */
-// void main() {
-//     float carRental;
-//     int milesDriven;
-//     float parkingFees;
-//     int parkingDays;
-//     char yesOrNo[1];
-
-//     do{
-//         printf("\nDid you rent a car?(y or n):");
-//         scanf("%s", yesOrNo);
-//         if(yesOrNo, "y") {
-//         printf("\nEnter any car rental fees:");
-//         scanf("%f", &carRental);
-//         } else {
-//             carRental = 0;
-//         }
-
-//         printf("\nEnter your total miles driven:");
-//         scanf("%d", &milesDriven);
-
-//         printf("\nEnter the number of days you used parking:");
-//         scanf("%d", &parkingDays);
-//         if (parkingDays <= 0) {
-//             parkingFees = 0;
-//         } else {
-//             printf("\nEnter your total parking fees:");
-//             scanf("%f", &parkingFees);
-//         }
-//     } while(carRental < 0 && milesDriven < 0 && parkingDays < 0 && parkingFees < 0);
-//     printf("\nrent main: %f\n", carRental);
-
-//     printCar(carRental, milesDriven, parkingFees, parkingDays);
-// }
