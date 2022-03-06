@@ -1,6 +1,6 @@
 #include <stdio.h>
 //#include "car.c"
-#include "printCar.c"
+//#include "printCar.c"
 // *NOTE TO CODE PARTNERS: you can put this code into the scans of main however you want to do it.
 /* **This is used to check my code on my local side as my local main.c file */
 void main() {

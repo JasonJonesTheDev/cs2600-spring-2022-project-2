@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "header.h"
 /* Outline
     all vars
     float carRental;
