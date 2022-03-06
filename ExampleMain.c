@@ -43,15 +43,13 @@ int main(){
     if(totalExpense > totalAlloableExpense){//checking if total expense is greater than allowable
 
         outOfPocket = amountExcess(totalAlloableExpense, totalExpense);//get difference
-        printf("Amount that needs to be reimbursed tot he company: %f", outOfPocket);//print difference
 
     }else if(totalExpense < totalAlloableExpense){//checking if total expense is less than allowable
 
         unUsedFundes = amountSaved(totalAlloableExpense, totalExpense);//get difference
-        printf("Amount saved by the company: %f", unUsedFundes);//print difference
 
     }else{
-        printf("Total expenses is equal to total allowable expenses");
+        unUsedFundes = amountSaved(totalAlloableExpense, totalExpense);
     }
 }
 

@@ -80,9 +80,10 @@ float amountSaved(float allowable, float total){
         printf("Something is broken");//this function should not be called if the total is greater than allowable call the excess function instead
         return -1;
     }else if(total == allowable){
-        printf("the trip cost is equal to the allowable trip cost");
+        printf("the trip cost is equal to the total allowable trip cost");
         return 0;
     }else{
+        printf("Amount that was saved by the company: %f", (allowable - total));
         return (allowable - total);
     }
  
@@ -98,9 +99,10 @@ float amountExcess(float allowable, float total){
         printf("Something is broken");//this function should not be called if the total is less than allowable, call the saved function instead
         return -1;
     }else if(total == allowable){
-        printf("the trip cost is equal to the allowable trip cost");
+        printf("the trip cost is equal to the total allowable trip cost");
         return 0;
     }else{
+        printf("Amount that needs to be reimbursed to the company: %f", (total - allowable));
         return (total - allowable);
     }
  
