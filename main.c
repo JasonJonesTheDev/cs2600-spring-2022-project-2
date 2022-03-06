@@ -86,51 +86,41 @@ int main()
     // int arrivalTime = get_arrival_time();
     // float totalMealsCost = get_totalMeal_cost(numOfDays);
     /***************************************************************************/
-    float carRental;
-    int milesDriven;
-    float parkingFees;
-    int parkingDays;
-    char yesOrNo[1];
+    float parkingFees = 0;
+    int parkingDays = 0;
+    float carRental = carRentalFees(carRental);
+    float milageExpense;
 
-    // Asks the user for the inputs needed for car fees
-    do
+    // Mile Fees Inputs
+    if (carRental == 0)
     {
-        // Car Rental Fees Inputs
-        printf("\nDid you rent a car?(y or n):");
-        scanf("%s", yesOrNo);
-        if (yesOrNo, "y")
-        {
-            printf("\nEnter any car rental fees:");
-            scanf("%f", &carRental);
-        }
-        else
-        {
-            carRental = 0;
-        }
+        milageExpense = mileFees();
+    }
 
-        // Mile Fees Inputs
-        if (carRental == 0)
-        {
-            printf("\nEnter your total miles driven:");
-            scanf("%d", &milesDriven);
-        }
-        // Parking Fees Inputs
-        printf("\nEnter the number of days you used parking:");
-        scanf("%d", &parkingDays);
-        if (parkingDays <= 0)
-        {
-            parkingFees = 0;
-        }
-        else
-        {
-            printf("\nEnter your total parking fees:");
-            scanf("%f", &parkingFees);
-        }
-    } while (carRental < 0 && milesDriven < 0 && parkingDays < 0 && parkingFees < 0);
+    //-----
+// Parking Fees Inputs
+GET_PARKING:
+    printf("\nEnter the number of days you used parking:");
+    scanf("%d", &parkingDays);
+    if (parkingDays > numOfDays)
+    {
+        printf("Please enter a correct numeber of days. You may not exceed %d days.", numOfDays);
+        goto GET_PARKING;
+    }
 
+    if (parkingDays <= 0)
+    {
+        parkingFees = 0;
+    }
+    else
+    {
+        printf("\nEnter your total parking fees:");
+        scanf("%f", &parkingFees);
+        parkingFees = calculateParkingFees(parkingFees, parkingDays);
+    }
+    ///-------
     // Prints the Car Fees
-    printCar(carRental, milesDriven, parkingFees, parkingDays);
-    ;
+    printCar(carRental, milageExpense, parkingFees);
 
     // departure time?
     // return home time?

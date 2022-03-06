@@ -3,10 +3,10 @@
 
 
 // Print Car Fees
-int printCar(float carRental, int milesDriven, float parkingFees, int parkingDays) {
-    printf("\nCar Rental Fees: %.2lf\n", carRentalFees(carRental));
-    printf("Miles Costs: %.2lf\n", mileFees(milesDriven));
-    printf("ParkingFees: %.2lf\n", calculateParkingFees(parkingFees, parkingDays));
+int printCar(float carRental, float milesReimbursed, float parkingFees) {
+    printf("\nCar Rental Fees: %.2lf\n", carRental);
+    printf("Miles Costs: %.2lf\n", milesReimbursed);
+    printf("ParkingFees: %.2lf\n", parkingFees);
 
     return 0;
 }

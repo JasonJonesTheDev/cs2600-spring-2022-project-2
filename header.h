@@ -25,9 +25,9 @@ float get_totalMeal_cost(int numOfDays);
 void FirstDay(int *ptr_const);
 void LastDay(struct meal_cost *lastDay);
 void commonDay(struct meal_cost *commonDay);
-int printCar(float carRental, int milesDriven, float parkingFees, int parkingDays);
+int printCar(float carRental, int milesDriven, float parkingFees);
 float carRentalFees(float carRental);
-float mileFees(int milesDriven);
+float mileFees();
 float calculateParkingFees(float parkingFees, int parkingDays);
 
 // // static float get_totalMeal_cost(int number_of_days);
