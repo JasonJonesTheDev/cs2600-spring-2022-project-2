@@ -23,9 +23,9 @@ int number_of_days () {
 		}
 
 
-	} while ((user < 1) || (user == 1));
+	} while ((days < 1) || (days == 1));
 
-	return user; 
+	return days; 
 }
 
 // int main() {

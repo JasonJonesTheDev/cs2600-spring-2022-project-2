@@ -35,13 +35,12 @@ void lastDay_mealRule(float breakfast, float lunch, float dinner, float *allow, 
 void otherDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
 
 void otherDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
-static float get_totalMeal_cost(int number_of_days);
+float get_totalMeal_cost(int number_of_days);
 
 void FirstDay (int *ptr_const);
 void LastDay (struct meal_cost *lastDay);
 void commonDay (struct meal_cost *commonDay);
 
-static float get_totalMeal_cost(int number_of_days);
 
 
 /***************  global variables ***************/
@@ -156,7 +155,7 @@ void get_mealCost (float *breakfast, float *lunch, float *dinner)
 
 
 
-static float get_totalMeal_cost(int number_of_days) {
+float get_totalMeal_cost(int number_of_days) {
 
     printf("get total meal cost: ");
 
