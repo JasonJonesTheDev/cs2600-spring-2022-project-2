@@ -5,6 +5,56 @@
 
 #include <stdio.h>
 
+/* Prototypes */
+//you may need to add these
+float airfare();
+float registrationFees();
+float hotelFees(int numOfDays);
+float amountSaved(float allowable, float total);
+float amountExcess(float allowable, float total);
+
+int main(){
+    //These should be declared already in your main
+    float totalExpense;
+    float totalAlloableExpense;
+    float outOfPocket;
+    float unUsedFundes;
+
+    int numOfDays;
+
+    float airFair;
+    float registrationFees;
+    float hotelExpenses;
+    ///////////////////////////////////
+
+    //Do this to get input and save values
+    airFair = airfare();
+    registrationFees = registrationFees();
+    hotelExpenses = hotelFees(numOfDays);//have to pass days here
+
+    //add these values to total maybe like this
+    totalExpense += airFair;
+    totalExpense += registrationFees;
+    totalExpense += hotelExpenses;
+    ///////////////////////////////////////
+
+
+    //Do this at the end after all the calculations are done
+    if(totalExpense > totalAlloableExpense){//checking if total expense is greater than allowable
+
+        outOfPocket = amountExcess(totalAlloableExpense, totalExpense);//get difference
+        printf("Amount that needs to be reimbursed tot he company: %f", outOfPocket);//print difference
+
+    }else if(totalExpense < totalAlloableExpense){//checking if total expense is less than allowable
+
+        unUsedFundes = amountSaved(totalAlloableExpense, totalExpense);//get difference
+        printf("Amount saved by the company: %f", unUsedFundes);//print difference
+
+    }else{
+        printf("Total expenses is equal to total allowable expenses");
+    }
+}
+
 /* Asks user for total airfare cost and returns that value*/
 float airfare() {
     float airfare;
