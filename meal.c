@@ -24,70 +24,77 @@ struct Meal {
 
 
 /***************  prototype ***************/
-float call_by_main(const int number_of_days, int departure_time, int arrival_time);
-float getCost(const int number_of_days, struct Meal *meal_cost);
 
-float firstDay_mealRule (struct Meal *meal_cost, int departure_time);
-float lastDay_mealRule (struct Meal *meal_cost, int arrival_time, int number_days);
+float call_by_main(const int number_of_days, int departure_time, int arrival_time, float *total_allowable);
 
-float otherDay_mealRule(struct Meal *meal_cost, int number_days);
+float user_input_mealCost(const int number_of_days, struct Meal *meal_cost);
 
+void firstDay_mealRule (struct Meal *meal_cost, int departure_time, float *ptr_allow);
 
+void lastDay_mealRule (struct Meal *meal_cost, int arrival_time, int number_days, float *ptr_allow);
 
+float commonRule(const int number_of_days, struct Meal *meal_cost);
 
 /***************  functions ***************/
+
+
 /**
- * ask for input,
- * do not accept negative number for meal cost
- * return the allowable total cost back to main
+ * return the modified data content of pointer by passing parameter arg[3]
+ * return total cost back to main
  */
-float call_by_main(const int number_of_days, int departure_time, int arrival_time)
+float call_by_main(const int number_of_days, int departure_time, int arrival_time, float *total_allowable)
 {
-    printf("\nCost of Each Meals: \n");
 //    printf("number of days = %d, departure time = %d, arrival time = %d\n",
 //           number_of_days, departure_time, arrival_time);
+
 
     // create an array of struct Meal to store 3 meals for each day
     struct Meal meal_cost[number_of_days];
 
-    for (int i = 0; i < number_of_days; ++i) {
-        meal_cost[i].breakfast = 0.0;
-        meal_cost[i].lunch = 0.0;
-        meal_cost[i].dinner = 0.0;
-        meal_cost[i].daily_totalCost = 0.0;
-    }
+
+    // get the value of total cost
+    float total_cost = user_input_mealCost(number_of_days, meal_cost);
+
+    float allow = commonRule(number_of_days, meal_cost);
+
+    total_allowable = &allow;
+
+//    printf("=== After asked user input, the data value of pointer is: %.2f ===\n",
+//          *total_allowable);
 
 
-    // ask user input for each meal cost, stored them into the array of struct Meal
+    // the data content of pointer total_allowable haven't counted the weird rule of first/last day
+    // subtract corresponding meal cost according to its corresponding time limit on that time
+    firstDay_mealRule(meal_cost, departure_time, total_allowable);
+//    printf("\n\n=== After applying first day rule, the data value of pointer is: %.2f ===\n\n",
+//           *total_allowable);
 
-    float total_cost = getCost(number_of_days, meal_cost);
+    lastDay_mealRule(meal_cost, arrival_time, number_of_days, total_allowable);
+//    printf("\n\n=== After applying last day rule, the data value of pointer is: %.2f ===\n\n",
+//           *total_allowable);
 
-    // count allowable cost for meals
-    float total_allowable = 0.0;
+//    printf("\n----------------\nTotal cost of the entire trip is $%.2f\n", total_cost);
+//
+//    printf("Total allowable cost for meal is $%.2f\n", *total_allowable);
 
-    total_allowable += firstDay_mealRule(meal_cost, departure_time);
-
-    total_allowable += lastDay_mealRule(meal_cost, arrival_time, number_of_days);
-
-    total_allowable += otherDay_mealRule(meal_cost, number_of_days);
-
-    printf("\n----------------\nTotal allowable cost for meal is $%.2f\n", total_allowable);
-
-    return total_allowable;
+    return total_cost;
 }
 
 
-// return total cost for the entire trip
-float getCost(const int number_of_days, struct Meal *meal_cost) {
 
-    float total = 0.0;
+
+// return total cost for the entire trip
+// ask for input,
+// do not accept negative number for meal cost
+float user_input_mealCost(const int number_of_days, struct Meal *meal_cost) {
+
+    float total = 0.0F, allow = 0.0F;
 
     for (int counter = 0; counter < number_of_days ; ++counter) {
 
         while(1) {
 
             // reset to 0.0 for each iteration (count daily cost)
-
             float breakfast = 0, lunch = 0, dinner = 0;
 
             printf("----- DAY %d -----\n", (counter+1));
@@ -109,7 +116,6 @@ float getCost(const int number_of_days, struct Meal *meal_cost) {
                 meal_cost[counter].daily_totalCost = (breakfast + lunch + dinner);
 
                 total += meal_cost[counter].daily_totalCost;
-
                 printf("Today's total cost = $%.2f\n", meal_cost[counter].daily_totalCost);
 
                 break; // break out while loop, go to next iteration in for loop
@@ -119,29 +125,75 @@ float getCost(const int number_of_days, struct Meal *meal_cost) {
     } // end of for loop
 
     return total;
+}
 
+
+/*
+ * common meal rule:
+ * the company allows up to $9 for breakfast,
+ * $12 for lunch,
+ * and $16 for dinner.
+ * Anything more than this must be paid by the employee.
+ * <=> anything less than that, add up the value to the content of pointer ptr_allow
+ */
+float commonRule(const int number_of_days, struct Meal *meal_cost)
+{
+    float  allow = 0.0F;
+
+    for (int i = 0; i < number_of_days; ++i) {
+
+        if (meal_cost[i].breakfast > 9) {
+            allow += 9;
+        } else {
+            allow += (meal_cost[i].breakfast);
+        }
+
+        if (meal_cost[i].lunch > 12) {
+            allow += 12;
+        } else {
+            allow += meal_cost[i].lunch;
+        }
+
+        if (meal_cost[i].dinner > 16) {
+            allow += 16;
+        } else {
+            allow += meal_cost[i].dinner ;
+        }
+
+    }
+
+ //   printf("\n\n=== After applying common rules, allowable meal cost is $%.2f ===\n\n", allow);
+
+    return allow;
 }
 
 
 //  breakfast is allowed as an expense if the time of departure is before 7 a.m.
 // Lunch is allowed if the time of departure is before 12 pm noon.
 // Dinner is allowed on the first day if the time of departure is before 6 p.m.
-float firstDay_mealRule (struct Meal *meal_cost, int departure_time)
+// --> subtract meal cost if the departure time was too late / arrival time was too early
+void firstDay_mealRule (struct Meal *meal_cost, int departure_time, float *ptr_allow)
 {
-    float total_allow = 0.0;
+     // float allow = 0.0F;
 
-    if (departure_time < 7) {
-        (total_allow) = meal_cost[0].daily_totalCost;
-    } else if (departure_time < 12) {
-        (total_allow) = (meal_cost[0].breakfast + meal_cost[0].lunch);
-    } else if (departure_time < 18) {
-        (total_allow) = meal_cost[0].dinner;
-    } else {
-        (total_allow) = 0.0;
+    // before 7, all meals are allowed ==> no subtraction at all
+    // 7-24, no breakfast
+    if (departure_time > 7) {
+        (*ptr_allow) = (meal_cost[0].breakfast);
     }
 
-   // printf("Testing: first day total allowable cost is $%.2f\n", (total_allow));
-    return total_allow;
+    // 12 - 24, no lunch as well
+    if (departure_time > 12) {
+        (*ptr_allow) -= (meal_cost[0].lunch);
+    }
+
+    // 18 - 24, dinner is not allowed
+    if (departure_time > 18) {
+        (*ptr_allow) -= (meal_cost[0].dinner);
+    }
+//
+//    printf("I am a ghost, I just silently took out money from late people on the first day.\n");
+//    printf("Total allowable cost: $%.2f\n", (*ptr_allow));
 }
 
 
@@ -149,63 +201,33 @@ float firstDay_mealRule (struct Meal *meal_cost, int departure_time)
 //    On the last day of the trip, breakfast is allowed if the time of arrival is after 8 a.m.
 //    Lunch is allowed if the time of arrival is after 1 p.m.
 //     Dinner is allowed on the last day if the time of arrival is after 7 p.m.
-float lastDay_mealRule (struct Meal *meal_cost, int arrival_time, int number_days) {
+void lastDay_mealRule (struct Meal *meal_cost, int arrival_time, int number_days, float *ptr_allow) {
 
-    float total_allow = 0.0;
+    int lastDay = number_days - 1;
 
-    // no meal allowed if before 8
+    // no meal allowed if before 8, so early bird will be starving @ 0 - 8
     if (arrival_time < 8) {
-       total_allow = 0.0;
+        (*ptr_allow) -= (meal_cost[lastDay].daily_totalCost);
     }
 
-        // 8 am to 1 pm, only breakfast is allowed
+    // @8 - 12, breakfast allowed, subtract lunch and dinner
     else if (arrival_time < 13) {
-        (total_allow) = meal_cost[number_days].breakfast;
+        (*ptr_allow) -= (meal_cost[lastDay].lunch);
+        (*ptr_allow) -= (meal_cost[lastDay].dinner);
     }
 
-        // 1pm - 7 pm, breakfast and lunch are allowed
+    // 13 - 19, breakfast and lunch are allowed, subtract dinner only
     else if (arrival_time < 19) {
-        (total_allow) = (meal_cost[number_days].breakfast + meal_cost[number_days].lunch);
+        (*ptr_allow) -= (meal_cost[lastDay].dinner);
     }
 
-        // after 7 pm (19), all allowed so nobody's starving eventually...
     else {
-        total_allow = (meal_cost[number_days].breakfast +
-                        meal_cost[number_days].lunch + meal_cost[number_days].lunch);
+        // after 19, all allowed --> no subtraction @ 19 - 24
     }
 
-//     printf("\nTesting - last day total allowable cost is: $%.2f\n", total_allow);
-
-    return total_allow;
+//    printf("I am a ghost, I just silently took out money from early birds on the last day.\n");
+//    printf("Total allowable cost: $%.2f\n", *(ptr_allow));
 }
 
-
-/*
- * the company allows up to $9 for breakfast,
- * $12 for lunch,
- * and $16 for dinner.
- * Anything more than this must be paid by the employee.
- */
-float otherDay_mealRule(struct Meal *meal_cost, int number_days) {
-
-    float allow = 0.0;
-
-    for (int i = 1; i < number_days - 1; ++i) {
-
-       if ( (meal_cost[i].breakfast < 9) || (meal_cost[i].breakfast == 9) ) {
-           allow += (meal_cost[i].breakfast);
-       }
-        if (  (meal_cost[i].lunch < 12) || (meal_cost[i].lunch == 12) ) {
-            allow += (meal_cost[i].lunch);
-        }
-
-        if (  (meal_cost[i].dinner < 16) || (meal_cost[i].dinner == 16) ) {
-            allow += (meal_cost[i].dinner);
-        }
-
-    }
-
-    return allow;
-}
 
 
