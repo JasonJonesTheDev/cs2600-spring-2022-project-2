@@ -14,32 +14,33 @@
  *
  */
 /***************  header file ***************/
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <string.h>
+// #include <stdlib.h>
+#include "header.h"
 
 #define numDays number_of_days ()
 
 
 /***************  prototype ***************/
-int number_of_days ();
-int get_time();
-void get_mealCost (float *breakfast, float *lunch, float *dinner);
-struct meal_cost * firstDay();
-void firstDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
+// int number_of_days ();
+// int get_time();
+// void get_mealCost (float *breakfast, float *lunch, float *dinner);
+// struct meal_cost * firstDay();
+// void firstDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
 
-int get_departure_time ();
-float total_mealCost(float breakfast_cost, float lunch_cost, float dinner_cost);
-int get_arrival_time ();
-void lastDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
-void otherDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
+// int get_departure_time ();
+// float total_mealCost(float breakfast_cost, float lunch_cost, float dinner_cost);
+// int get_arrival_time ();
+// void lastDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
+// void otherDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
 
-void otherDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
-float get_totalMeal_cost(int number_of_days);
+// void otherDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
+// float get_totalMeal_cost(int number_of_days);
 
-void FirstDay (int *ptr_const);
-void LastDay (struct meal_cost *lastDay);
-void commonDay (struct meal_cost *commonDay);
+// void FirstDay (int *ptr_const);
+// void LastDay (struct meal_cost *lastDay);
+// void commonDay (struct meal_cost *commonDay);
 
 
 
