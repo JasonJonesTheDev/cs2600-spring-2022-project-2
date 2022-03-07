@@ -3,7 +3,8 @@
  *
  */
 /***************  header file ***************/
-#include <stdio.h>
+// #include <stdio.h>
+#include "header.h"
 
 #define numDays number_of_days ()
 

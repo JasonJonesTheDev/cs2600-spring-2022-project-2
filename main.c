@@ -80,16 +80,42 @@ int main()
     //  total expense (running total) + days * 106
     //  days *
 
-    printf("Weclome to \"TERC\" \nTravel Expense Reimbursement Calculator\n");
-    int numOfDays = number_of_days();
+    printf("Welcome to \"TERC\" \nTravel Expense Reimbursement Calculator\n");
+     int numOfDays = number_of_days();
     // int departureTime = get_departure_time();
     // int arrivalTime = get_arrival_time();
     // float totalMealsCost = get_totalMeal_cost(numOfDays);
+    // Total days traveled
+    //const int numOfDays = numDays;
+
+    // The time of departure on the first day of the trip,
+    // and the time of arrival back home on the last day of the trip.
+    // int departureTime = get_departure_time();
+    // int arrivalTime = get_arrival_time();
+
+    // // The amount of each meal eaten and total meal cost after compensation.
+    // // use pointer to modify the data of allowable cost, and passed it in function call_by_main()
+    // float *totalAllowableCost;
+
+    // float totalMealsCost = call_by_main(numOfDays, departureTime,
+    //                                     arrivalTime, totalAllowableCost);
+
+    // printf("\n----------------\nTotal cost of the entire trip is $%.2f\n", totalMealsCost);
+    // printf("Total allowable cost of entire trip is $%.2f\n", (totalAllowableCost));
+
+    // // get the data content valud of pointer totalAllowableCost
+    // // create another pointer hi and assigned it to the address of pointer totalAllowableCost
+    // float *hi = &(totalAllowableCost);
+
+    // // finally dispaly the data content ...... that was modified in functions in panda.c
+    // printf("Total allowable cost of entire trip is $%.2f\n", hi);
+
     /***************************************************************************/
     float parkingFees = 0;
     int parkingDays = 0;
     float carRental = carRentalFees(carRental);
     float milageExpense;
+    float taxiCost = calculateTaxiFees(numOfDays);
 
     // Mile Fees Inputs
     if (carRental == 0)
@@ -97,28 +123,10 @@ int main()
         milageExpense = mileFees();
     }
 
-    //-----
-// Parking Fees Inputs
-GET_PARKING:
-    printf("\nEnter the number of days you used parking:");
-    scanf("%d", &parkingDays);
-    if (parkingDays > numOfDays)
-    {
-        printf("Please enter a correct numeber of days. You may not exceed %d days.", numOfDays);
-        goto GET_PARKING;
-    }
+    parkingFees = calculateParkingFees(numOfDays);
 
-    if (parkingDays <= 0)
-    {
-        parkingFees = 0;
-    }
-    else
-    {
-        printf("\nEnter your total parking fees:");
-        scanf("%f", &parkingFees);
-        parkingFees = calculateParkingFees(parkingFees, parkingDays);
-    }
-    ///-------
+    //-----
+
     // Prints the Car Fees
     printCar(carRental, milageExpense, parkingFees);
 
