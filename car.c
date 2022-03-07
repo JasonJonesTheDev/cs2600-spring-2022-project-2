@@ -15,7 +15,7 @@
 */
 
 /* Car Rental Fees Function */
-float carRentalFees()
+float carRentalFees( )
 {
     float carRental;
     // Car Rental Fees Inputs
