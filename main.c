@@ -80,7 +80,7 @@ int main()
     //  total expense (running total) + days * 106
     //  days *
 
-    printf("Weclome to \"TERC\" \nTravel Expense Reimbursement Calculator\n");
+    printf("Welcome to \"TERC\" \nTravel Expense Reimbursement Calculator\n");
     int numOfDays = number_of_days();
     // int departureTime = get_departure_time();
     // int arrivalTime = get_arrival_time();
