@@ -2,19 +2,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-// #include "printCar.c"
-// #include "car.c"
 
-/***************  global variables ***************/
-// int departure_time;
-// int arrival_time;
+float totalAllowableCalc(int , float , float , float , float);
+void printTimes(int, int);
 
 static int totalMeal_cost;
 
 /***************  struct ***************/
 struct meal_cost
 {
-
     float total_mealCost;
     float extra_mealCost;
     float allowable_mealCost;
@@ -22,117 +18,110 @@ struct meal_cost
 
 int main()
 {
+    /* Variables */
+    float totalExpense;
+    float totalAlowableExpense;
+    float outOfPocket;
+    float unUsedFunds;
 
-    // // Variables
-    // // The running total allowable expenses for the trip
-    // float totalExpense;
-    // // The running total expenses incurred by the traveler,
-    // float totalAlowableExpense;
-    // // The excess that must be reimbursed by the traveler, if any.
-    // float outOfPocket;
-    // // The amount saved by the company/business person if the expenses
-    // // were under the total allowed.
-    // float unUsedFunds;
-    // // Total possible amount traveler can receive
-    // float maximumFunds;
-    // // Total days traveled
-    // // int numOfDays;
-    // // The time of departure on the first day of the trip,
-    // // and the time of arrival back home on the last day of the trip.
-    // int departureTime;
-    // int arrivalTime;
-    // // The amount of any round-trip airfare
-    // float airfair;
-    // // The amount of any car rentals
-    // float carRental;
-    // // Miles driven, if a private vehicle was used.
-    // // Calculate the vehicle expense as $0.27 per mile driven
-    // int milesDriven;
-    // float milesReimbers;
-    // // Parking fees (The company allows up to $6 per day.
-    // // Anything more than this must be paid by the employee.)
-    // float parkingFees;
-    // // Taxi fees, if a taxi was used anytime during the trip
-    // // (The company allows up to $10 per day, for each day a taxi was used.
-    // // Anything more than this must be paid by the employee.)
-    // float taxiFees;
-    // // Conference or seminar registration fees
-    // float registrationFees;
-    // // Hotel expenses (The company allows up to $90 per night for lodging.
-    // // Anything more than this must be paid by the employee.)
-    // float hotelExpense;
-    // // The amount of each meal eaten and total meal cost after compensation.
-    // float breakfast;
-    // float lunch;
-    // float dinner;
-    // float totalMealsCost;
+    int numOfDays;
+    int departureTime;
+    int arrivalTime;
+    float gasCost;
+    float airfair;
+    float carRental;
+    float milesReimbers;
+    float parkingFees;
+    float taxiFees;
+    float registrationFees;
+    float hotelExpense;
 
-    //  maximumFunds = (airFair + carRental + totalMealsCost + )
-    //  air fair = variable
-    //  car rental = car rental
-    //  parking fees = 6
-    //  taxi fees = 10
-    //  hotel = 90
-    //  food = variable
-    //  gas = variable
-    //  conference = variable
-    //  calculate total
-    //  total expense (running total) + days * 106
-    //  days *
+    printf("\t Welcome to \"TERC\"\n");
+    printf("Travel Expense Reimbursement Calculator\n");
+    printf("---------------------------------------\n");
+    printf("\n");
 
-    printf("Welcome to \"TERC\" \nTravel Expense Reimbursement Calculator\n");
-     int numOfDays = number_of_days();
-    // int departureTime = get_departure_time();
-    // int arrivalTime = get_arrival_time();
-    // float totalMealsCost = get_totalMeal_cost(numOfDays);
-    // Total days traveled
-    //const int numOfDays = numDays;
+    numOfDays = number_of_days();
+    departureTime = get_departure_time();
+    arrivalTime = get_arrival_time();
+    //Call whatever function is required for meals.
+    airfair = airfare();
+    hotelExpense = hotelFees(numOfDays);
+    carRental = carRentalFees();
+    taxiFees = calculateTaxiFees(numOfDays);
 
-    // The time of departure on the first day of the trip,
-    // and the time of arrival back home on the last day of the trip.
-    // int departureTime = get_departure_time();
-    // int arrivalTime = get_arrival_time();
-
-    // // The amount of each meal eaten and total meal cost after compensation.
-    // // use pointer to modify the data of allowable cost, and passed it in function call_by_main()
-    // float *totalAllowableCost;
-
-    // float totalMealsCost = call_by_main(numOfDays, departureTime,
-    //                                     arrivalTime, totalAllowableCost);
-
-    // printf("\n----------------\nTotal cost of the entire trip is $%.2f\n", totalMealsCost);
-    // printf("Total allowable cost of entire trip is $%.2f\n", (totalAllowableCost));
-
-    // // get the data content valud of pointer totalAllowableCost
-    // // create another pointer hi and assigned it to the address of pointer totalAllowableCost
-    // float *hi = &(totalAllowableCost);
-
-    // // finally dispaly the data content ...... that was modified in functions in panda.c
-    // printf("Total allowable cost of entire trip is $%.2f\n", hi);
-
-    /***************************************************************************/
-    float parkingFees = 0;
-    int parkingDays = 0;
-    float carRental = carRentalFees(carRental);
-    float milageExpense;
-    float taxiCost = calculateTaxiFees(numOfDays);
-
-    // Mile Fees Inputs
     if (carRental == 0)
     {
-        milageExpense = mileFees();
+        gasCost = mileFees();
     }
 
     parkingFees = calculateParkingFees(numOfDays);
+    registrationFees = conferenceFees();
 
-    //-----
+    totalExpense += (airfair + hotelExpense + carRental + taxiFees + parkingFees + registrationFees); // add meal cost total
+    totalAlowableExpense = totalAllowableCalc(numOfDays, airfair, carRental, gasCost, registrationFees);
 
-    // Prints the Car Fees
-    printCar(carRental, milageExpense, parkingFees);
+    printf("\n");
+    printf("---------------Overview----------------\n");
+    printTimes(arrivalTime, departureTime);
+    printf("Airfare: $%.2f\n", airfair);
+    printf("Hotel Cost: $%.2f\n", hotelExpense);
+    printf("Total Meal Cost: \n");
+    printf("Car Rental Fees: $%.2f\n", carRental);
+    printf("Gas Reimbursement: $%.2f\n", gasCost);
+    printf("Taxi Fees: $%.2f\n", taxiFees);
+    printf("Parking Fees: $%.2f\n", parkingFees);
+    printf("Registration Fees: $%.2f\n", registrationFees);
+    printf("\n");
+    printf("----------------Totals-----------------\n");
+    printf("Total Allowable Expense: $%.2f\n", totalAlowableExpense);
+    printf("Total Expenses: $%.2f\n", totalExpense);
 
-    // departure time?
-    // return home time?
-    // airFair = airfair(airfair);
+    if(totalExpense > totalAlowableExpense){//checking if total expense is greater than allowable
 
+        outOfPocket = amountExcess(totalAlowableExpense, totalExpense);//get difference
+
+    }else if(totalExpense < totalAlowableExpense){//checking if total expense is less than allowable
+
+        unUsedFunds = amountSaved(totalAlowableExpense, totalExpense);//get difference
+
+    }else{
+        unUsedFunds = amountSaved(totalAlowableExpense, totalExpense);
+    }
+
+    char x[10];
+    printf("\n");
+    printf("Enter anything to close ");
+    scanf ("%s", &x);
     return 0;
+}
+
+/* Calculates Total Allowable Based On Values Given*/
+float totalAllowableCalc(int days, float airfare, float carRentalFees, float milesExpense, float registrationFees){
+    float totalAllowable = 0;
+
+    totalAllowable += airfare;
+    totalAllowable += carRentalFees;
+    totalAllowable += milesExpense;
+    totalAllowable += (days * 6); //parking fees
+    totalAllowable += (days * 10); //taxi fees
+    totalAllowable += registrationFees;
+    totalAllowable += (days * 90); // hotal fees
+    totalAllowable += ((days * 9) + (days * 12) + (days * 16)); // meal cost max
+
+    return totalAllowable;
+}
+
+void printTimes(int arrival, int departure){
+    if(departure > 12){
+        printf("Departure Time: %d:00 pm\n", (departure - 12));
+    }else{
+        printf("Departure Time: %d:00 am\n", departure);
+    }
+
+    if(arrival > 12){
+        printf("Arrival Time: %d:00 pm\n", (arrival - 12));
+    }else{
+        printf("Arrival Time: %d:00 am\n", arrival);
+    }
 }

@@ -15,16 +15,17 @@
 */
 
 /* Car Rental Fees Function */
-float carRentalFees(float carRental)
+float carRentalFees()
 {
+    float carRental;
     // Car Rental Fees Inputs
-    printf("\nDid you rent a car?(y or n):");
+    printf("Did you rent a car?(y or n): ");
     char yesOrNo[6];
     scanf("%s", &yesOrNo);
     if (yesOrNo[0] == 'y')
     {
     GET_RENTALCOST:
-        printf("\nEnter any car rental fees:");
+        printf("Enter any car rental fees: $");
         scanf("%f", &carRental);
         if (carRental <= 0 || carRental > 1000)
         {
@@ -49,7 +50,7 @@ float carRentalFees(float carRental)
 /* Mile Fees Function */
 float mileFees()
 {
-    printf("\nEnter your total miles driven:");
+    printf("Enter your total miles driven: ");
     int milesDriven = 0;
     scanf("%d", &milesDriven);
 
@@ -75,7 +76,7 @@ float calculateParkingFees(int numOfDays)
 // Parking Fees Inputs
 // Parking Days Scan
 GET_PARKING_DAYS:
-    printf("\nEnter the number of days you used parking:");
+    printf("Enter the number of days you used parking: ");
     scanf("%d", &parkingDays);
 
     // Check Parking Days
@@ -96,7 +97,7 @@ GET_PARKING_DAYS:
         {
         // Parking Fees Scan
         GET_PARKING:
-            printf("\nEnter your total parking fees:");
+            printf("Enter your total parking fees: $");
             scanf("%f", &parkingFees);
 
             // Check Parking Fees
@@ -119,21 +120,21 @@ GET_PARKING_DAYS:
 
 // Calculate Taxi Fees
 
-int calculateTaxiFees(int numOfDays)
+float calculateTaxiFees(int numOfDays)
 {
     char taxiUse[10]; 
-    double taxiFee = 0;
+    float taxiFee = 0;
     int taxiDays = 0; 
     // Ask if taxi was used
-    printf("Did you use a taxi on your trip?(y or n):");
-    scanf("%f", &taxiUse[0]);
+    printf("Did you use a taxi on your trip?(y or n): ");
+    scanf("%s", &taxiUse[0]);
 
     if (taxiUse[0] == 'y')
     {
     // Taxi Days Scan
     TAXI_FEE_DAYS:
-        printf("How many days did you use a taxi?");
-        scanf("%f", &taxiDays);
+        printf("How many days did you use a taxi?: ");
+        scanf("%d", &taxiDays);
 
         // Check Taxi Days
         if (taxiDays > numOfDays || taxiDays < 0)
@@ -153,7 +154,7 @@ int calculateTaxiFees(int numOfDays)
             {
             // Taxi Fees Scan
             TAXI_FEES:
-                printf("Enter your total taxi fees:");
+                printf("Enter your total taxi fees: $");
                 scanf("%f", &taxiFee);
 
                 // Check Taxi Fees
