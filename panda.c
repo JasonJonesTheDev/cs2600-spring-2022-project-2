@@ -20,6 +20,7 @@ int main()
 
 
     // The amount of each meal eaten and total meal cost after compensation.
+    // use pointer to modify the data of allowable cost, and passed it in function call_by_main()
     float *totalAllowableCost;
 
     float totalMealsCost = call_by_main(numOfDays, departureTime,
@@ -29,8 +30,13 @@ int main()
     printf("\n----------------\nTotal cost of the entire trip is $%.2f\n", totalMealsCost);
     printf("Total allowable cost of entire trip is $%.2f\n", (totalAllowableCost));
 
+    // get the data content valud of pointer totalAllowableCost
+    // create another pointer hi and assigned it to the address of pointer totalAllowableCost
     float *hi = &(totalAllowableCost);
+    
+    // finally dispaly the data content ...... that was modified in functions in panda.c
     printf("Total allowable cost of entire trip is $%.2f\n", hi);
+    
 
     return 0;
 }
