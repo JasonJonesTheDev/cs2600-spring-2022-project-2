@@ -5,6 +5,54 @@
 
 #include <stdio.h>
 
+/* Prototypes */
+//you may need to add these
+float airfare();
+float registrationFees();
+float hotelFees(int numOfDays);
+float amountSaved(float allowable, float total);
+float amountExcess(float allowable, float total);
+
+int main(){
+    //These should be declared already in your main
+    float totalExpense;
+    float totalAlloableExpense;
+    float outOfPocket;
+    float unUsedFundes;
+
+    int numOfDays;
+
+    float airFair;
+    float registrationFees;
+    float hotelExpenses;
+    ///////////////////////////////////
+
+    //Do this to get input and save values
+    airFair = airfare();
+    registrationFees = registrationFees();
+    hotelExpenses = hotelFees(numOfDays);//have to pass days here
+
+    //add these values to total maybe like this
+    totalExpense += airFair;
+    totalExpense += registrationFees;
+    totalExpense += hotelExpenses;
+    ///////////////////////////////////////
+
+
+    //Do this at the end after all the calculations are done
+    if(totalExpense > totalAlloableExpense){//checking if total expense is greater than allowable
+
+        outOfPocket = amountExcess(totalAlloableExpense, totalExpense);//get difference
+
+    }else if(totalExpense < totalAlloableExpense){//checking if total expense is less than allowable
+
+        unUsedFundes = amountSaved(totalAlloableExpense, totalExpense);//get difference
+
+    }else{
+        unUsedFundes = amountSaved(totalAlloableExpense, totalExpense);
+    }
+}
+
 /* Asks user for total airfare cost and returns that value*/
 float airfare() {
     float airfare;
@@ -80,10 +128,9 @@ float amountSaved(float allowable, float total){
         printf("Something is broken");//this function should not be called if the total is greater than allowable call the excess function instead
         return -1;
     }else if(total == allowable){
-        printf("the trip cost is equal to the total allowable trip cost");
+        printf("the trip cost is equal to the allowable trip cost");
         return 0;
     }else{
-        printf("Amount that was saved by the company: %f", (allowable - total));
         return (allowable - total);
     }
  
@@ -99,10 +146,9 @@ float amountExcess(float allowable, float total){
         printf("Something is broken");//this function should not be called if the total is less than allowable, call the saved function instead
         return -1;
     }else if(total == allowable){
-        printf("the trip cost is equal to the total allowable trip cost");
+        printf("the trip cost is equal to the allowable trip cost");
         return 0;
     }else{
-        printf("Amount that needs to be reimbursed to the company: %f", (total - allowable));
         return (total - allowable);
     }
  
