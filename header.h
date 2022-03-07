@@ -14,8 +14,8 @@ struct meal_cost *firstDay();
 void firstDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
 
 int get_departure_time();
-float total_mealCost(float breakfast_cost, float lunch_cost, float dinner_cost);
 int get_arrival_time();
+float total_mealCost(float breakfast_cost, float lunch_cost, float dinner_cost);
 void lastDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
 void otherDay_mealRule(float breakfast, float lunch, float dinner, float *allow, float *extra);
 
@@ -25,11 +25,19 @@ float get_totalMeal_cost(int numOfDays);
 void FirstDay(int *ptr_const);
 void LastDay(struct meal_cost *lastDay);
 void commonDay(struct meal_cost *commonDay);
+
 int printCar(float carRental, int milesDriven, float parkingFees);
-float carRentalFees(float carRental);
+float carRentalFees();
 float mileFees();
 float calculateParkingFees(int numOfDays);
-int calculateTaxiFees(int numOfDays);
+float calculateTaxiFees(int numOfDays);
+
+/* Casey Functions */
+float airfare();
+float conferenceFees();
+float hotelFees(int numOfDays);
+float amountSaved(float totalAlloableExpense, float totalExpense);
+float amountExcess(float totalAllowableExpense, float totalExpense);
 
 // // static float get_totalMeal_cost(int number_of_days);
 // // Variables

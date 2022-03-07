@@ -19,7 +19,7 @@
 // #include <stdlib.h>
 #include "header.h"
 
-#define numDays number_of_days ()
+//#define numDays number_of_days ()
 
 
 /***************  prototype ***************/
@@ -82,10 +82,6 @@ int number_of_days () {
             continue;
         }
 
-        else {
-            printf("You spent total %d days on the trip.\n", num_days);
-        }
-
     } while (num_days < 1);
 
     printf("\n");
@@ -116,7 +112,7 @@ int get_time()
         goto GET_TIME;
     }
     else {
-        printf("You enter: %d\n", input);
+        //printf("You enter: %d\n", input);
     }
 
     return input;
@@ -125,12 +121,14 @@ int get_time()
 int get_departure_time () {
     printf("--- Departure Time ---\n");
     departure_time = get_time();
+    printf("\n");
     return departure_time;
 }
 
 int get_arrival_time () {
     printf("--- Arrival Time ---\n");
     arrival_time = get_time();
+    printf("\n");
     return arrival_time;
 }
 
@@ -163,7 +161,7 @@ float get_totalMeal_cost(int number_of_days) {
     struct meal_cost *day_last;
 
     FirstDay(&totalMeal_cost);
-    LastDay(&day_last);
+    LastDay(day_last);
 
     for (int (i) = 2; (i) < (number_of_days - 2); ++(i)) {
         commonDay(day_last);
