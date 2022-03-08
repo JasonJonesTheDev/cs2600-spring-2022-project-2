@@ -1,6 +1,6 @@
 #include "header.h"
 
-float mealLogic(numOfDays, departureTime, arrivalTime)
+float mealLogic(int numOfDays, int departureTime, int arrivalTime)
 {
     int mealIndex = 0;
     float total = 0;
@@ -8,7 +8,7 @@ float mealLogic(numOfDays, departureTime, arrivalTime)
     float breakfast = 0;
     float lunch = 0;
     float dinner = 0;
-
+    printf("d: %d a: %d\n\n", departureTime, arrivalTime);
     if (departureTime < 7 && arrivalTime > 17)
     {
         total = dailyMealsAdder(numOfDays, mealIndex);
@@ -70,7 +70,7 @@ float mealLogic(numOfDays, departureTime, arrivalTime)
     else
         return total;
 }
-float dailyMealsAdder(numOfDays, mealIndex)
+float dailyMealsAdder(int numOfDays, int mealIndex)
 {
     float breakfast = 0;
     float lunch = 0;
