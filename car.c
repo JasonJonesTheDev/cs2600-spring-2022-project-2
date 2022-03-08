@@ -15,9 +15,9 @@
 */
 
 /* Car Rental Fees Function */
-float carRentalFees( )
+float carRentalFees()
 {
-    float carRental;
+    float carRental = 0;
     // Car Rental Fees Inputs
     printf("Did you rent a car?(y or n): ");
     char yesOrNo[6];
