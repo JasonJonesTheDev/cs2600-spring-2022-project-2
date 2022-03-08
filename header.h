@@ -23,7 +23,7 @@ int get_arrival_time();
 // float get_totalMeal_cost(int numOfDays);
 
 float mealLogic(int numOfDays, int departureTime, int arrivalTime);
-float dailyMealsAdder(int numOfDays, int mealIndex);
+float dailyMealsAdder(int numOfDays);
 float totalAllowableCalc(int days, float airfare, float carRentalFees, float milesExpense, float registrationFees, int departure, int arrival);
 void printTimes(int, int);
 

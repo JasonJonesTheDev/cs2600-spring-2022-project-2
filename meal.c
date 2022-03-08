@@ -1,76 +1,128 @@
 #include "header.h"
 
-float mealLogic(numOfDays, departureTime, arrivalTime)
+float mealLogic(int numOfDays, int departureTime, int arrivalTime)
 {
-    int mealIndex = 0;
     float total = 0;
-    int lastDay = numOfDays;
     float breakfast = 0;
     float lunch = 0;
     float dinner = 0;
+    
+    int cont = 1;
+    
+    /* First Day Checker*/
+    printf("-- Day 1 --\n");
+    while (cont == 1){
+        if (departureTime < 7)
+        {
+            printf("Enter Breakfast cost: $");
+            scanf("%f", &breakfast);
+            printf("Enter Lunch Cost: $");
+            scanf("%f", &lunch);
+            printf("Enter Dinner Cost: $");
+            scanf("%f", &dinner);
 
-    if (departureTime < 7 && arrivalTime > 17)
-    {
-        total = dailyMealsAdder(numOfDays, mealIndex);
-        return total;
-    }
-    else if (departureTime >= 12)
-    {
-        numOfDays--;
-        mealIndex++;
-        total = dailyMealsAdder(numOfDays, mealIndex);
-    }
-    else if (departureTime >= 18)
-    {
-        numOfDays--;
-        mealIndex = 1;
-        total = dailyMealsAdder(numOfDays, mealIndex);
-    }
-
-    printf("-- Day %d --", &lastDay);
-
-    if (arrivalTime >= 8)
-    {
-        int cont = 1;
-        while (cont == 1)
+            if(dinner > 0 && lunch > 0 && breakfast > 0){
+                total += (lunch + dinner + breakfast);
+                cont = 0;
+            }else{
+                printf("Invalid values must be greater than 0\n");
+            }
+        }
+        else if (departureTime >= 7 && departureTime < 12)
         {
             printf("Enter Lunch Cost: $");
             scanf("%f", &lunch);
             printf("Enter Dinner Cost: $");
             scanf("%f", &dinner);
-            if (breakfast < 0 || lunch < 0 || dinner < 0)
-            {
-                printf("Please Enter Values Of At Least 0\n");
-            }
-            else
-            {
-                total += (breakfast + lunch + dinner);
+
+            if(dinner > 0 && lunch > 0){
+                total += (lunch + dinner);
                 cont = 0;
+            }else{
+                printf("Invalid values must be greater than 0\n");
             }
         }
-    }
-    else if (arrivalTime >= 13)
-    {
-        int cont = 1;
-        while (cont == 1)
+        else if (departureTime >= 12 && departureTime < 18)
         {
             printf("Enter Dinner Cost: $");
             scanf("%f", &dinner);
-            if (breakfast < 0 || lunch < 0 || dinner < 0)
-            {
-                printf("Please Enter Values Of At Least 0\n");
-            }
-            else
-            {
-                total += (breakfast + lunch + dinner);
+
+            if(dinner > 0){
+                total += (dinner);
                 cont = 0;
+            }else{
+                printf("Invalid values must be greater than 0\n");
             }
         }
+        else
+        {
+            printf("No eligible meals for day 1");
+            cont = 0;
+        }
     }
-    else
-        return total;
+
+    //all normal days
+    int mealindex = (numOfDays - 2);
+    total += dailyMealsAdder(mealindex);
+
+    /*Last Day Checker*/
+    cont = 1;
+    printf("-- Day %d --\n", numOfDays);
+    while(cont == 1){
+        if (arrivalTime >= 8 && arrivalTime < 13)
+        {
+            printf("Enter Breakfast cost: $");
+            scanf("%f", &breakfast);
+
+            if(breakfast > 0){
+                total += (breakfast);
+                cont = 0;
+            }else{
+                printf("Invalid values must be greater than 0\n");
+            }
+        }
+        else if (arrivalTime >= 13 && arrivalTime < 19)
+        {
+            printf("Enter Breakfast cost: $");
+            scanf("%f", &breakfast);
+            printf("Enter Lunch Cost: $");
+            scanf("%f", &lunch);
+
+            if(lunch > 0 && breakfast > 0){
+                total += (lunch + breakfast);
+                cont = 0;
+            }else{
+                printf("Invalid values must be greater than 0\n");
+            }
+        }
+        else if (arrivalTime >= 19)
+        {
+            printf("Enter Breakfast cost: $");
+            scanf("%f", &breakfast);
+            printf("Enter Lunch Cost: $");
+            scanf("%f", &lunch);
+            printf("Enter Dinner Cost: $");
+            scanf("%f", &dinner);
+
+            if(dinner > 0 && lunch > 0 && breakfast > 0){
+                total += (lunch + dinner + breakfast);
+                cont = 0;
+            }else{
+                printf("Invalid values must be greater than 0\n");
+            }
+        }
+        else
+        {
+            printf("No eligible meals for day %d", numOfDays);
+        }
+    }
+
+    return total;
+
 }
-float dailyMealsAdder(numOfDays, mealIndex)
+
+/*Calculator for normal day*/
+float dailyMealsAdder(int numOfDays)
 {
     float breakfast = 0;
     float lunch = 0;
@@ -79,36 +131,25 @@ float dailyMealsAdder(numOfDays, mealIndex)
 
     for (int i = 0; i < numOfDays; i++)
     {
-        for (mealIndex; mealIndex < 2; mealIndex++)
+        int cont = 1;
+        while (cont == 1)
         {
-            int cont = 1;
-            while (cont == 1)
+            printf("-- Day %d --\n", (i + 2));
+            printf("Enter Breakfast cost: $");
+            scanf("%f", &breakfast);
+            printf("Enter Lunch Cost: $");
+            scanf("%f", &lunch);
+            printf("Enter Dinner Cost: $");
+            scanf("%f", &dinner);
+
+            if (breakfast < 0 || lunch < 0 || dinner < 0)
             {
-                if (mealIndex = 0)
-                {
-                    printf("-- Day %d --\n", (i + 1));
-                    printf("Enter Breakfast cost: $");
-                    scanf("%f", &breakfast);
-                }
-                else if (mealIndex = 1)
-                {
-                    printf("Enter Lunch Cost: $");
-                    scanf("%f", &lunch);
-                }
-                else if (mealIndex = 2)
-                {
-                    printf("Enter Dinner Cost: $");
-                    scanf("%f", &dinner);
-                }
-                if (breakfast < 0 || lunch < 0 || dinner < 0)
-                {
-                    printf("Please Enter Values Of At Least 0\n");
-                }
-                else
-                {
-                    total += (breakfast + lunch + dinner);
-                    cont = 0;
-                }
+                printf("Please Enter Values Of At Least 0\n");
+            }
+            else
+            {
+                total += (breakfast + lunch + dinner);
+                cont = 0;
             }
         }
     }
