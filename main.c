@@ -1,23 +1,4 @@
 #include "header.h"
-// #include <stdio.h>
-// #include <string.h>
-// #include <stdlib.h>
-// #include "car.c"
-// #include "printCar.c"
-// #include "meal.c"
-
-//float totalAllowableCalc(int, float, float, float, float);
-//void printTimes(int, int);
-
-// static int totalMeal_cost;
-
-/***************  struct ***************/
-// struct meal_cost
-// {
-//     float total_mealCost;
-//     float extra_mealCost;
-//     float allowable_mealCost;
-// };
 
 int main()
 {
@@ -41,6 +22,7 @@ int main()
     float totalMealCost = 0;
     float totalMealComp = 0;
 
+    printf("---------------------------------------\n");
     printf("\t Welcome to \"TERC\"\n");
     printf("Travel Expense Reimbursement Calculator\n");
     printf("---------------------------------------\n");
@@ -49,79 +31,52 @@ int main()
     numOfDays = number_of_days();
     departureTime = get_departure_time();
     arrivalTime = get_arrival_time();
-    //---------------------------------------------------------------------
-
-    // // The amount of each meal eaten and total meal cost after compensation.
-    // // use pointer to modify the data of allowable cost, and passed it in function call_by_main()
-    // float *totalAllowableCost;
-
-    // float totalMealsCost = call_by_main(numOfDays, departureTime, arrivalTime, totalAllowableCost);
-
-    // printf("\n----------------\nTotal cost of the entire trip is $%.2f\n", totalMealsCost);
-    // printf("Total allowable cost of entire trip is $%.2f\n", (totalAllowableCost));
-
-    // // get the data content valid of pointer totalAllowableCost
-    // // create another pointer hi and assigned it to the address of pointer totalAllowableCost
-    // float *hi = &(totalAllowableCost);
-
-    // // finally dispaly the data content ...... that was modified in functions in panda.c
-    // printf("Total allowable cost of entire trip is $%.2f\n", hi);
-
     totalMealCost = mealLogic(numOfDays, departureTime, arrivalTime);
+    airfair = airfare();
+    hotelExpense = hotelFees(numOfDays);
+    carRental = carRentalFees();
+    taxiFees = calculateTaxiFees(numOfDays);
+    if (carRental < 1)
+    {
+        gasCost = mileFees();
+    }
 
-    printf("%f",totalMealCost);
+    parkingFees = calculateParkingFees(numOfDays);
+    registrationFees = conferenceFees();
 
+    totalExpense += (totalMealCost + airfair + hotelExpense + carRental + taxiFees + parkingFees + registrationFees); // add meal cost total
+    totalAlowableExpense = totalAllowableCalc(numOfDays, airfair, carRental, gasCost, registrationFees, departureTime, arrivalTime);
 
-    // //------------------------------------------------------------------------
-    // // Call whatever function is required for meals.
-    // airfair = airfare();
-    // hotelExpense = hotelFees(numOfDays);
-    // //printf("car rental: %f \n", carRental);
-    // carRental = carRentalFees();
-    // //printf("car rental: %f \n", carRental);
-    // taxiFees = calculateTaxiFees(numOfDays);
-    // //printf("car rental: %f \n", carRental);
-    // if (carRental < 1)
-    // {
-    //     gasCost = mileFees();
-    // }
+    printf("\n");
+    printf("---------------Overview----------------\n");
+    printTimes(arrivalTime, departureTime);
+    printf("Airfare: $%.2f\n", airfair);
+    printf("Hotel Cost: $%.2f\n", hotelExpense);
+    printf("Total Meal Cost: \n");
+    printf("Car Rental Fees: $%.2f\n", carRental);
+    printf("Gas Reimbursement: $%.2f\n", gasCost);
+    printf("Taxi Fees: $%.2f\n", taxiFees);
+    printf("Parking Fees: $%.2f\n", parkingFees);
+    printf("Registration Fees: $%.2f\n", registrationFees);
+    printf("\n");
+    printf("----------------Totals-----------------\n");
+    printf("Total Allowable Expense: $%.2f\n", totalAlowableExpense);
+    printf("Total Expenses: $%.2f\n", totalExpense);
 
-    // parkingFees = calculateParkingFees(numOfDays);
-    // registrationFees = conferenceFees();
+    if (totalExpense > totalAlowableExpense)
+    { // checking if total expense is greater than allowable
 
-    // totalExpense += (totalMealCost + airfair + hotelExpense + carRental + taxiFees + parkingFees + registrationFees); // add meal cost total
-    // totalAlowableExpense = totalAllowableCalc(numOfDays, airfair, carRental, gasCost, registrationFees, departureTime, arrivalTime);
+        outOfPocket = amountExcess(totalAlowableExpense, totalExpense); // get difference
+    }
+    else if (totalExpense < totalAlowableExpense)
+    { // checking if total expense is less than allowable
 
-    // printf("\n");
-    // printf("---------------Overview----------------\n");
-    // printTimes(arrivalTime, departureTime);
-    // printf("Airfare: $%.2f\n", airfair);
-    // printf("Hotel Cost: $%.2f\n", hotelExpense);
-    // printf("Total Meal Cost: \n");
-    // printf("Car Rental Fees: $%.2f\n", carRental);
-    // printf("Gas Reimbursement: $%.2f\n", gasCost);
-    // printf("Taxi Fees: $%.2f\n", taxiFees);
-    // printf("Parking Fees: $%.2f\n", parkingFees);
-    // printf("Registration Fees: $%.2f\n", registrationFees);
-    // printf("\n");
-    // printf("----------------Totals-----------------\n");
-    // printf("Total Allowable Expense: $%.2f\n", totalAlowableExpense);
-    // printf("Total Expenses: $%.2f\n", totalExpense);
-
-    // if (totalExpense > totalAlowableExpense)
-    // { // checking if total expense is greater than allowable
-
-    //     outOfPocket = amountExcess(totalAlowableExpense, totalExpense); // get difference
-    // }
-    // else if (totalExpense < totalAlowableExpense)
-    // { // checking if total expense is less than allowable
-
-    //     unUsedFunds = amountSaved(totalAlowableExpense, totalExpense); // get difference
-    // }
-    // else
-    // {
-    //     unUsedFunds = amountSaved(totalAlowableExpense, totalExpense);
-    // }
+        unUsedFunds = amountSaved(totalAlowableExpense, totalExpense); // get difference
+    }
+    else
+    {
+        unUsedFunds = amountSaved(totalAlowableExpense, totalExpense);
+    }
 
     char x[10];
     printf("\n");
@@ -129,23 +84,6 @@ int main()
     scanf("%s", &x);
     return 0;
 }
-
-// /* Calculates Total Allowable Based On Values Given*/
-// float totalAllowableCalc(int days, float airfare, float carRentalFees, float milesExpense, float registrationFees)
-// {
-//     float totalAllowable = 0;
-
-//     totalAllowable += airfare;
-//     totalAllowable += carRentalFees;
-//     totalAllowable += milesExpense;
-//     totalAllowable += (days * 6);  // parking fees
-//     totalAllowable += (days * 10); // taxi fees
-//     totalAllowable += registrationFees;
-//     totalAllowable += (days * 90);                              // hotel fees
-//     totalAllowable += ((days * 9) + (days * 12) + (days * 16)); // meal cost max
-
-//     return totalAllowable;
-// }
 
 void printTimes(int arrival, int departure)
 {

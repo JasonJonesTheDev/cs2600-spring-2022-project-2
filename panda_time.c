@@ -1,18 +1,4 @@
-/**
- * panda_time.c
- *
- */
-/***************  header file ***************/
-// #include <stdio.h>
 #include "header.h"
-
-#define numDays number_of_days ()
-
-
-/***************  prototype ***************/
-int number_of_days ();
-int get_arrival_time ();
-int get_departure_time();
 
 
 /***************  functions ***************/
